@@ -1,6 +1,6 @@
 {
   "name": "enquirer-prompt-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Opens your text editor and waits for you to save your input during a prompt.",
   "license": "MIT",
   "author": "Sebastian Sebald (https://github.com/sebald)",
