@@ -1,0 +1,31 @@
+{
+  "name": "enquirer-prompt-editor",
+  "version": "1.0.0",
+  "description": "Opens your text editor and waits for you to save your input during a prompt.",
+  "license": "MIT",
+  "author": "Sebastian Sebald (https://github.com/sebald)",
+  "repository": "sebald/enquirer-prompt-editor",
+  "bugs": {
+    "url": "https://github.com/sebald/enquirer-prompt-editor/issues"
+  },
+  "keywords": [
+    "cli",
+    "command",
+    "editor",
+    "enquirer",
+    "input",
+    "inquirer",
+    "prompt",
+    "prompts",
+    "readline",
+    "terminal"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "enquirer": "^2.2.0",
+    "external-editor": "^3.0.3"
+  },
+  "scripts": {
+    "example": "node example/prompt"
+  }
+}
