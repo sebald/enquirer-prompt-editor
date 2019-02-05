@@ -31,5 +31,5 @@ declare const EditorPrompt: Prompt;
 export = EditorPrompt;
 
 export interface EditorPromptOptions extends BasePromptOptions {
-  extensions: string;
+  extension?: string;
 }
