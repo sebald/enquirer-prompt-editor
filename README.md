@@ -20,6 +20,7 @@ enquirer
     type: 'editor',
     name: 'bio',
     message: 'Please write a short bio of at least 3 lines.',
+    extension: 'md',
     validate: text => {
       if (text.split('\n').length < 2) {
         return 'Must be at least 3 lines.';
@@ -27,5 +28,6 @@ enquirer
       return true;
     },
   })
-  .then(answers => console.log(answers));
+  .then(answers => console.log(answers))
+  .catch(err => console.log(err));
 ```

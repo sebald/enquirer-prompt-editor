@@ -1,9 +1,22 @@
 const { Prompt } = require('enquirer');
-const { editAsync } = require('external-editor');
+const { edit } = require('edit-briefly');
 
 class Editor extends Prompt {
   constructor(options) {
     super(options);
+    this.value = options.initial || '';
+    this.cursorHide();
+  }
+
+  async keypress(input, event = {}) {
+    /**
+     * Whitelist only certain key events.
+     * This prevents accidental submits, when `return` is pressed.
+     */
+    if (!['cancel'].includes(event.name)) {
+      return;
+    }
+    await super.keypress(input, event);
   }
 
   async hint() {
@@ -34,18 +47,26 @@ class Editor extends Prompt {
     this.write([header, prompt, footer].filter(Boolean).join('\n'));
     this.restore();
 
+    /**
+     * Call this as a side effect, otherwhise we'll end in a endless loop
+     * of submits if validation fails.
+     *
+     * submit -> invalid -> render -> ...
+     */
+    this.openEditor();
+  }
+
+  async openEditor() {
     if (this.state.submitted) {
       return;
     }
 
-    editAsync(this.value, async (err, text) => {
-      if (err) {
-        await this.cancel(err);
-      } else {
-        this.value = text;
-        await this.submit();
-      }
+    const text = await edit({
+      contents: this.value,
+      extension: this.options.extension || '',
     });
+    this.value = text;
+    await this.submit();
   }
 }
 
